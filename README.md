@@ -1,6 +1,9 @@
 # Projeto Full
 Clonando o projeto
-Para começar, clone o projeto em seu ambiente local. 
+Para começar, clone o projeto em seu ambiente local.
+
+# Instale o CLI do Adonisjs
+npm install -g @adonisjs/cli
 
 # Configurando o servidor
 
