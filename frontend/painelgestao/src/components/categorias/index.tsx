@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../../api/index.js";
 import Produtos from "../produtos/index.js";
 import CategoriaFiltro from "../filtroCategorias/index.js";
+import Modal from "../modal/index.js";
 
 function Categorias() {
   const [categorias, setCategorias] = useState({});
@@ -9,6 +10,7 @@ function Categorias() {
   const [editandoCategoriaId, setEditandoCategoriaId] = useState(null);
   const [editandoCategoriaNome, setEditandoCategoriaNome] = useState("");
   const [produtosFiltrados, setProdutosFiltrados] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
 
   const fetchCategorias = async () => {
     try {
@@ -68,6 +70,7 @@ function Categorias() {
         categoriaId: id,
       });
       setProdutosFiltrados(data.data);
+      setModalAberto(true);
       console.log("produtos", produtosFiltrados);
     } catch (error) {
       console.error("Erro ao buscar", error);
@@ -89,7 +92,10 @@ async function excluirCategoriaId(id:number) {
     fetchCategorias();
   }
 }
-
+  function fecharModal() {
+    setModalAberto(false);
+    setProdutosFiltrados([]);
+  }
 
   return (
     <>
@@ -138,6 +144,7 @@ async function excluirCategoriaId(id:number) {
             <Produtos produtosFiltrados={produtosFiltrados} categorias={categorias}/>
         </div>
             <CategoriaFiltro exibePorCategoria={exibePorCategoria} categorias={categorias}/>
+             {modalAberto && <Modal produtos={produtosFiltrados} closeModal={fecharModal} />}
       </div>
     </>
   );

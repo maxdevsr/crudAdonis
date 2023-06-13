@@ -29,6 +29,7 @@
     "@adonisjs/session": "^6.4.0",
     "@adonisjs/shield": "^7.1.0",
     "@adonisjs/view": "^6.2.0",
+    "@react-pdf/renderer": "^3.1.12",
     "adonis-lucid": "^3.0.16",
     "axios": "^1.4.0",
     "luxon": "^3.3.0",
