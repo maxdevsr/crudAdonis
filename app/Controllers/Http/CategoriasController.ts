@@ -43,6 +43,7 @@ export default class CategoriasController {
         const produtos = await Produto.query()
         .where('categoria_id', categoriaId)
         .preload('categoria')
+        .preload('tamanho')
         .exec()
 
         return {

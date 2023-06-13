@@ -22,6 +22,18 @@ export default class TamanhosController {
     }
   }
 
+  ublic async vincularTamanhos({ request, response, params }: HttpContextContract) {
+    const { produtoId } = params
+    const { tamanhos } = request.body()
+
+    const produto = await Produto.findOrFail(produtoId)
+    // await produto.related('tamanhos').attach(tamanhos)
+
+    return {
+      message: 'Tamanhos vinculados ao produto com sucesso!',
+    }
+  }
+
   public async atualizarTamanho({ request, response }: HttpContextContract) {
     const { id, ...data } = request.body()
     const tamanho = await Tamanho.findOrFail(id)

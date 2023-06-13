@@ -33,6 +33,7 @@ export default class Produto extends BaseModel {
   @belongsTo(() => Tamanho, {
     foreignKey: 'tamanhoId',
   })
+  
   public tamanho: BelongsTo<typeof Tamanho>
 
   @column.dateTime({ autoCreate: true })

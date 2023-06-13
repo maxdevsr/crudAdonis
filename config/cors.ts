@@ -20,7 +20,19 @@ const corsConfig: CorsConfig = {
   | you can define a function to enable/disable it on per request basis as well.
   |
   */
-  enabled: false,
+    enabled: true, // Habilita o CORS
+
+  // Define a lista de origens permitidas
+  origin: [
+    'http://localhost:5173', // Adicione seu domínio aqui
+  ],
+
+  // Define a lista de cabeçalhos permitidos
+  headers: [
+    'Content-Type',
+    'Authorization',
+    // Adicione outros cabeçalhos necessários
+  ],
 
   // You can also use a function that return true or false.
   // enabled: (request) => request.url().startsWith('/api')
@@ -44,7 +56,6 @@ const corsConfig: CorsConfig = {
   |                     one of the above values.
   |
   */
-  origin: true,
 
   /*
   |--------------------------------------------------------------------------
@@ -75,7 +86,6 @@ const corsConfig: CorsConfig = {
   | Function          - Receives the current header and should return one of the above values.
   |
   */
-  headers: true,
 
   /*
   |--------------------------------------------------------------------------

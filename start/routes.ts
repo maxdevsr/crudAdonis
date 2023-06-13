@@ -24,15 +24,15 @@ import CategoriasController from 'App/Controllers/Http/CategoriasController'
 Route.group(() => {
   Route.post('/salvarCategoria', 'CategoriasController.salvarCategoria')
   Route.get('/todasCategorias', 'CategoriasController.todasCategorias')
-  Route.patch('/atualizarCategoria', 'CategoriasController.atualizarCategoria')
+  Route.put('/atualizarCategoria', 'CategoriasController.atualizarCategoria')
   Route.delete('/apagarCategoria', 'CategoriasController.apagarCategoria')
   Route.post('/produtosPorCategoria', 'CategoriasController.produtosPorCategoria')
-}).prefix('/categoria')
+}).prefix('/categoria').middleware('auth')
 
 Route.group(() => {
   Route.post('/salvarProduto', 'ProdutosController.salvarProduto')
   Route.get('/todosProdutos', 'ProdutosController.todosProdutos')
-  Route.patch('/atualizarProduto', 'ProdutosController.atualizarProduto')
+  Route.put('/atualizarProduto', 'ProdutosController.atualizarProduto')
   Route.delete('/apagarProduto', 'ProdutosController.apagarProduto') 
 }).prefix('/produtos')
 
@@ -43,3 +43,26 @@ Route.group(() => {
   Route.delete('/apagarTamanho', 'TamanhosController.apagarTamanho')
   Route.post('/tamanhos/produtosPorTamanho', 'TamanhosController.produtosPorTamanho')
 }).prefix('/tamanhos')
+
+Route.group(() => {
+  Route.post('/store', 'UsersController.store')
+}).prefix('/users')
+
+Route.post('login',async ({auth, request, response}) => {
+  const email = request.input('email')
+  const password = request.input('password')
+
+  try {
+    const token = await auth.use('api').attempt(email, password)
+    return token
+  } catch {
+    return response.unauthorized('Invalid credentials')
+  }
+})
+
+Route.get('/dashboard',async ({auth}) => {
+    await auth.use('api').authenticate()
+    console.log(auth.user);
+    
+    return `Olá ${auth.user.name}, seja bem vindo!`
+  })
