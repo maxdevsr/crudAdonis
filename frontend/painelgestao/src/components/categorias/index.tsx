@@ -93,7 +93,7 @@ async function excluirCategoriaId(id:number) {
 
   return (
     <>
-      <div>
+      <div style={{display: "flex",flexDirection: "row",alignItems: "center", justifyContent:'center', gap: "5px", border:'0.5px solid gray', borderRadius:'8px'}} >
         <input
           value={novaCategoria}
           onChange={(e) => setNovaCategoria(e.target.value)}
@@ -102,7 +102,8 @@ async function excluirCategoriaId(id:number) {
       </div>
       <div>
         {Object.values(categorias).map((categoria) => (
-          <div key={categoria.id}>
+          <div style={{display: "flex",flexDirection: "row",alignItems: "center", justifyContent:'center', gap: "5px", border:'0.5px solid gray', borderRadius:'8px'}} 
+            key={categoria.id}>
             {editandoCategoriaId === categoria.id ? (
               <>
                 <input
@@ -132,8 +133,11 @@ async function excluirCategoriaId(id:number) {
             )}
           </div>
         ))}
-        <Produtos produtosFiltrados={produtosFiltrados} categorias={categorias}/>
-        <CategoriaFiltro exibePorCategoria={exibePorCategoria} categorias={categorias}/>
+        <div>
+            <h3>Crie um produto vinculado a uma categoria</h3>
+            <Produtos produtosFiltrados={produtosFiltrados} categorias={categorias}/>
+        </div>
+            <CategoriaFiltro exibePorCategoria={exibePorCategoria} categorias={categorias}/>
       </div>
     </>
   );

@@ -27,7 +27,7 @@ Route.group(() => {
   Route.put('/atualizarCategoria', 'CategoriasController.atualizarCategoria')
   Route.delete('/apagarCategoria', 'CategoriasController.apagarCategoria')
   Route.post('/produtosPorCategoria', 'CategoriasController.produtosPorCategoria')
-}).prefix('/categoria').middleware('auth')
+}).prefix('/categoria')
 
 Route.group(() => {
   Route.post('/salvarProduto', 'ProdutosController.salvarProduto')
@@ -54,7 +54,11 @@ Route.post('login',async ({auth, request, response}) => {
 
   try {
     const token = await auth.use('api').attempt(email, password)
-    return token
+    const user = {
+      name: email.split('@')[0],
+      token: token.token
+    };
+    return user;
   } catch {
     return response.unauthorized('Invalid credentials')
   }

@@ -108,9 +108,11 @@ function Produtos({produtosFiltrados, categorias }) {
   }
 
   return (
-    <>
-      <div>
+    <div >
+      <div style={{display: "flex", flexDirection: "column", gap:'0.5rem'}}>
+        <h3>Nome do produto</h3>
         <input value={novoProduto.nome || ""} onChange={(e) => setNovoProduto({ ...novoProduto, nome: e.target.value }) }/>
+        <h3>Categoria do produto</h3>
         <select
           value={novoProduto.categoriaId || ""}
           onChange={(e) => setNovoProduto({ ...novoProduto, categoriaId: e.target.value })}>
@@ -121,11 +123,17 @@ function Produtos({produtosFiltrados, categorias }) {
             </option>
           ))}
         </select>
+        <h3>Quantidade do produto</h3>
         <input value={novoProduto.quantidade || ""} type="number"
           onChange={(e) => setNovoProduto({ ...novoProduto, quantidade: e.target.value })}/>
-        <input value={novoProduto.valor || ""} type="number"
+        <h3>Valor do produto</h3>
+        <input
+          type="text"
           onChange={(e) =>
-            setNovoProduto({ ...novoProduto, valor: e.target.value })}/>
+            setNovoProduto({ ...novoProduto, valor: e.target.value })
+          }
+        />
+        <h3>Descrição do produto</h3>
         <textarea value={novoProduto.descricao || ""}
           onChange={(e) =>
             setNovoProduto({ ...novoProduto, descricao: e.target.value })
@@ -134,7 +142,7 @@ function Produtos({produtosFiltrados, categorias }) {
       </div>
       <div>
         {Object.values(produtos).map((produto) => (
-          <div key={produto.id}>
+          <div style={{display:'flex', flexDirection:'row', gap:'0.5px', width:'50%' }} key={produto.id}>
             {editandoProdutoId === produto.id ? (
               <>
                 <input value={editandoProduto.nome || ""}
@@ -163,9 +171,9 @@ function Produtos({produtosFiltrados, categorias }) {
                 <button onClick={cancelarEdicao}>cancelar</button>
               </>
             ) : (
-              <>
+              <div style={{display:'flex', flexDirection:'column', gap:'0.5px'}}>
                 <p>{produto.nome}</p>
-                <p>Categoria: {categorias[produto.categoriaId]?.nome}</p>
+                {/* <p>Categoria: {categorias[produto.categoriaId]?.nome}</p> */}
                 <p>Quantidade: {produto.quantidade}</p>
                 <p>Valor: {produto.valor}</p>
                 <p>Descrição: {produto.descricao}</p>
@@ -188,12 +196,12 @@ function Produtos({produtosFiltrados, categorias }) {
                 <button onClick={() => excluirProdutoId(produto.id)}>
                   Excluir
                 </button>
-              </>
+              </div>
             )}
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

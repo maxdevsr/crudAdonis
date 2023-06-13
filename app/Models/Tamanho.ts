@@ -1,8 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
-import Tamanho from 'App/Models/Tamanho'
-
-export default class Produto extends BaseModel {
+export default class Tamanho extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
